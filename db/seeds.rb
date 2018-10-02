@@ -1,14 +1,6 @@
-require_relative '../../config/environment'
+require 'pry'
 require_all 'lib'
 
-def get_data
-  # headers = {
- #   :accept => 'application/json',
- #   :authorization => "Token #{ENV['API_KEY']}"
- # }
-#   response_string = RestClient.get('https://api.globalwinescore.com/globalwinescores/latest/?limit=10', headers)
-#   response_hash = JSON.parse(response_string)
-#   wines = response_hash["results"]
 wines =   [{"wine"=>"Rivers-Marie, Lore Vineyard Cabernet Sauvignon, Oakville",
  "wine_id"=>121092,
  "wine_slug"=>"rivers-marie-lore-vineyard-cabernet-sauvignon-oakville",
@@ -200,12 +192,3 @@ wines =   [{"wine"=>"Rivers-Marie, Lore Vineyard Cabernet Sauvignon, Oakville",
  "journalist_count"=>3,
  "lwin"=>1099719,
  "lwin_11"=>10997192014}]
-end ### End of get_data
-
-
-def create_wines
-  wines = get_data
-  wines.each do |wine|
-    Wine.create(name: wine['wine'],color: wine['color'], country: wine['country'],year: wine['vintage'],score: wine['score'])
-  end
-end
