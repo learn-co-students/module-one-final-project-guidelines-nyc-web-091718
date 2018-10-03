@@ -18,6 +18,8 @@ GEM
     domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.5.0)
+    faker (1.9.1)
+      i18n (>= 0.7)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (0.8.1)
@@ -62,6 +64,7 @@ PLATFORMS
 
 DEPENDENCIES
   dotenv
+  faker
   json
   pry
   require_all

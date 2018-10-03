@@ -27,11 +27,17 @@ def get_initial_user_input
     else
       puts "I can't find any wine like that, sorry bub"
     end
-  elsif user_choice == 'recommendation'
-    recommendation
+  end
+
+  if user_choice == 'review'
+    review
+
+  if user_choice == 'recommendation'
+    recommendation #Brennan added for method below
   # elsif user_choice = 'exit'
   #   exit
   end
+ end
 end
 
 def try_again
@@ -41,11 +47,7 @@ def try_again
   if user_choice == 'yes'
     puts "Yay! Would you like to leave a review or get a quick recommendation?"
     user_choice = gets.strip.downcase
-  if user_choice == 'review'
-    #start here - go to the review path
-    review
    end
-  end
     user_choice != 'no'
 end
 
@@ -73,8 +75,9 @@ def review
     puts "Which of these wines do you wish to review? (Enter number)"
     potential_matches.each_with_index do |wine, i|
       puts "#{i+1}. #{wine['name']} -- #{wine['year']}"
-    id_input = gets.chomp
     end
+    id_input = gets.chomp #user chooses a numbered wine to review (i.e. 1. Merrvale)
+    create_review
   else
     puts "We can't seem to find your wine. Please try searching again"
     get_initial_user_input
@@ -82,7 +85,16 @@ def review
 end
 
 def create_review
-
+  puts "Leave that review here:"
+  review_input = gets.strip.downcase
+  puts "Thanks for your review!"
+  puts "Is there anything else? (yes or no)"
+  anything_else = gets.chomp
+  if anything_else == "yes"
+    get_initial_user_input
+  else
+    say_bye
+  end
 end
 
 def recommendation
@@ -92,6 +104,7 @@ def recommendation
   puts wine.year
   puts wine.country
 
+  #make this a helper method eventually!
   puts "Is there anything else? (yes or no)"
   anything_else = gets.chomp
   if anything_else == "yes"
