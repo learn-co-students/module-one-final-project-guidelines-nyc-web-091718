@@ -48,3 +48,42 @@ end
 def say_bye
   puts 'coolio, bye!'
 end
+
+
+
+def review
+  puts "Please enter the name of the wine that you wish to review:"
+  response_name = gets.chomp
+  puts "Please enter the year or vintage of this wine:"
+  response_year = gets.chomp
+
+  potential_matches = Wine.where("name like ?", "%#{response_name}%")
+
+  matched_by_year = potential_matches.map do |wine|
+    if wine.year = response_year
+      wine.id
+      wine.name
+    end
+  end
+
+  if matched_by_year.length == 1
+    puts "Is this the wine you wish to review? (yes or no)"
+    puts matched_by_year
+    yes_no = gets.chomp
+  elsif matched_by_year.length > 1
+    puts matched_by_year
+    puts "Which of these wines do you wish to review? (Enter ID number)"
+    id_input = gets.chomp
+  else
+    puts "We can't seem to find your wine. Please try searching again"
+  end
+end
+
+
+def suggestion
+  puts "Here's your suggestion:"
+  wine = Wine.all.sample
+  puts wine.name
+  puts wine.year
+  puts wine.country
+end
