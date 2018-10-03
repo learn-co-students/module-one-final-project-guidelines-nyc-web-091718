@@ -28,7 +28,7 @@ class Game
   end
 
   def create_npc_random
-    Npc.create_random
+    Npc.create_random(@current_world.id)
   end
 
   def print_all_npcs
@@ -69,11 +69,12 @@ class Game
   end
 
   def world_select
-    puts "select a world"
+    puts "Select a world"
     puts "[0] New World"
     World.all.each do |w|
       puts "[#{w.id}] #{w.name}"
     end
+    print "Select World: "
     choice = gets.chomp
     case choice
     when '0'
