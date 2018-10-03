@@ -22,6 +22,8 @@ GEM
     domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
     eventmachine (1.2.7)
+    faker (1.9.1)
+      i18n (>= 0.7)
     faraday (0.15.3)
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.12.2)
@@ -78,6 +80,7 @@ PLATFORMS
 
 DEPENDENCIES
   binance
+  faker
   json
   pry
   require_all

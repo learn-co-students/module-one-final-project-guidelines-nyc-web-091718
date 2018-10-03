@@ -10,6 +10,8 @@ class CreateNpcs < ActiveRecord::Migration[5.0]
       t.string :job
       t.string :personality
       t.integer :hp
+      t.integer :wealth
     end
   end
 end
+# Still editing
