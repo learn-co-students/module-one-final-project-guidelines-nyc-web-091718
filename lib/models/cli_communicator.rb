@@ -2,6 +2,27 @@ require 'pry'
 
 def welcome
   puts "Hello soon-to-be wine connoisseur!"
+  puts "Please enter your name" ###TODO: discuss how to build this out further
+  name_response = gets.strip
+  check_user(name_response)
+end
+
+def get_user_names
+  User.all.map do |user|
+    user.name
+  end
+end
+
+def check_user(name_response)
+  user_name_array = get_user_names
+  if user_name_array.include?(name_response)
+    current_user = User.all.select do |user|
+      user.name == name_response
+    end
+  else
+    current_user = User.create(name: name_response)
+  end
+  current_user
 end
 
 def get_initial_user_input
@@ -85,9 +106,15 @@ def review
 end
 
 def create_review
-  puts "Leave that review here:"
-  review_input = gets.strip.downcase
+  puts "On a scale of 1-5 how would you rate this wine (1 = worst, 5 = best)?"
+  rating_input = gets.strip
+  puts "Leave your comments here:"
+  review_input = gets.strip
+
+  Review.create(user_id:"", wine_id: "", content: review_input, rating: rating_input)
+
   puts "Thanks for your review!"
+  
   puts "Is there anything else? (yes or no)"
   anything_else = gets.chomp
   if anything_else == "yes"
