@@ -1,6 +1,6 @@
-require 'pry'
-require_all 'lib'
+require_relative '../config/environment'
 
+def setup_seed_data
 wines =   [{"wine"=>"Rivers-Marie, Lore Vineyard Cabernet Sauvignon, Oakville",
  "wine_id"=>121092,
  "wine_slug"=>"rivers-marie-lore-vineyard-cabernet-sauvignon-oakville",
@@ -192,3 +192,15 @@ wines =   [{"wine"=>"Rivers-Marie, Lore Vineyard Cabernet Sauvignon, Oakville",
  "journalist_count"=>3,
  "lwin"=>1099719,
  "lwin_11"=>10997192014}]
+end
+
+
+def create_wines
+  wines = setup_seed_data
+  wines.each do |wine|
+    wine_url = 'https://www.globalwinescore.com/wine-score/' + wine["wine_slug"]
+    Wine.create(name: wine['wine'],color: wine['color'], country: wine['country'],year: wine['vintage'],score: wine['score'], url: wine_url)
+  end
+end
+
+create_wines
