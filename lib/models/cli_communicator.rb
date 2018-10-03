@@ -1,13 +1,14 @@
 require 'pry'
 
 def welcome
-  puts "Hello wine soon-to-be wine connoisseur!"
+  puts "Hello soon-to-be wine connoisseur!"
 end
 
 def get_initial_user_input
   puts "Would you like to SEARCH for a wine, REVIEW a wine, or get a RECOMMENDATION?"
   puts "Type in an option below:"
   user_choice = gets.strip.downcase
+  exit if user_choice = 'exit'
   if user_choice == 'search'
     puts "Please pick a color: Red, White, or Pink"
     color_choice = gets.strip
@@ -64,10 +65,10 @@ def review
     puts potential_matches[0]['year']
     yes_no = gets.chomp
   elsif potential_matches.length > 1
-    list = potential_matches.map do |wine|
-      "#. #{wine['name']} -- #{wine['year']}"
+    list = potential_matches.each do |wine|
+      "#{i}. #{wine['name']} -- #{wine['year']}"
     end
-    puts "Which of these wines do you wish to review? (Enter ID number)"
+    puts "Which of these wines do you wish to review? (Enter number)"
     puts list
     id_input = gets.chomp
   else
@@ -75,6 +76,7 @@ def review
     get_initial_user_input
   end
 end
+
 
 def recommendation
   puts "Here's your recommendation:"
