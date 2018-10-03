@@ -5,7 +5,7 @@ def welcome
 end
 
 def get_initial_user_input
-  puts "Would you like to SEARCH for a wine, REVIEW a wine, or get a RECOMMNEDATION?"
+  puts "Would you like to SEARCH for a wine, REVIEW a wine, or get a RECOMMENDATION?"
   puts "Type in an option below:"
   user_choice = gets.strip.downcase
   if user_choice == 'search'
@@ -26,6 +26,8 @@ def get_initial_user_input
     else
       puts "I can't find any wine like that, sorry bub"
     end
+  elsif user_choice == 'recommendation'
+      recommendation
   end
 end
 
@@ -37,9 +39,8 @@ def try_again
     puts "Yay! Would you like to leave a review or get a quick recommendation?"
     user_choice = gets.strip.downcase
   if user_choice == 'review'
-    puts "Please put in wine name"
-    user_choice = gets.strip.downcase
     #start here - go to the review path
+    review
    end
   end
     user_choice != 'no'
@@ -52,38 +53,41 @@ end
 
 
 def review
-  puts "Please enter the name of the wine that you wish to review:"
-  response_name = gets.chomp
-  puts "Please enter the year or vintage of this wine:"
-  response_year = gets.chomp
+  puts "Please put in wine name"
+  user_choice = gets.strip.downcase
 
-  potential_matches = Wine.where("name like ?", "%#{response_name}%")
+  potential_matches = Wine.where("name like ?", "%#{user_choice}%")
 
-  matched_by_year = potential_matches.map do |wine|
-    if wine.year = response_year
-      wine.id
-      wine.name
-    end
-  end
-
-  if matched_by_year.length == 1
+  if potential_matches.length == 1
     puts "Is this the wine you wish to review? (yes or no)"
-    puts matched_by_year
+    puts potential_matches[0]['name']
+    puts potential_matches[0]['year']
     yes_no = gets.chomp
-  elsif matched_by_year.length > 1
-    puts matched_by_year
+  elsif potential_matches.length > 1
+    list = potential_matches.map do |wine|
+      "#. #{wine['name']} -- #{wine['year']}"
+    end
     puts "Which of these wines do you wish to review? (Enter ID number)"
+    puts list
     id_input = gets.chomp
   else
     puts "We can't seem to find your wine. Please try searching again"
+    get_initial_user_input
   end
 end
 
-
-def suggestion
-  puts "Here's your suggestion:"
+def recommendation
+  puts "Here's your recommendation:"
   wine = Wine.all.sample
   puts wine.name
   puts wine.year
   puts wine.country
+
+  puts "Is there anything else? (yes or no)"
+  anything_else = gets.chomp
+  if anything_else == "yes"
+    get_initial_user_input
+  else
+    say_bye
+  end
 end
