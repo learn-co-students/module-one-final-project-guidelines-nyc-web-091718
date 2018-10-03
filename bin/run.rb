@@ -3,7 +3,8 @@ require 'pry'
 
 
 welcome
-
+user = check_user('Devon')
+binding.pry
 keep_searching = true
 
 while keep_searching do

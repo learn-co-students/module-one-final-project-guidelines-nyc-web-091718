@@ -4,7 +4,7 @@ def welcome
   puts "Hello soon-to-be wine connoisseur!"
   puts "Please enter your name" ###TODO: discuss how to build this out further
   name_response = gets.strip
-  check_user(name_response)
+  # check_user(name_response)
 end
 
 def get_user_names
@@ -114,7 +114,7 @@ def create_review
   Review.create(user_id:"", wine_id: "", content: review_input, rating: rating_input)
 
   puts "Thanks for your review!"
-  
+
   puts "Is there anything else? (yes or no)"
   anything_else = gets.chomp
   if anything_else == "yes"
