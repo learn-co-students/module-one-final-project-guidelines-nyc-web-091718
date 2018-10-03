@@ -8,7 +8,7 @@ def get_initial_user_input
   puts "Would you like to SEARCH for a wine, REVIEW a wine, or get a RECOMMENDATION?"
   puts "Type in an option below:"
   user_choice = gets.strip.downcase
-  exit if user_choice = 'exit'
+
   if user_choice == 'search'
     puts "Please pick a color: Red, White, or Pink"
     color_choice = gets.strip
@@ -28,7 +28,9 @@ def get_initial_user_input
       puts "I can't find any wine like that, sorry bub"
     end
   elsif user_choice == 'recommendation'
-      recommendation
+    recommendation
+  # elsif user_choice = 'exit'
+  #   exit
   end
 end
 
@@ -68,12 +70,11 @@ def review
       create_review
     end
   elsif potential_matches.length > 1
-    list = potential_matches.each do |wine|
-      "#{i}. #{wine['name']} -- #{wine['year']}"
-    end
     puts "Which of these wines do you wish to review? (Enter number)"
-    puts list
+    potential_matches.each_with_index do |wine, i|
+      puts "#{i+1}. #{wine['name']} -- #{wine['year']}"
     id_input = gets.chomp
+    end
   else
     puts "We can't seem to find your wine. Please try searching again"
     get_initial_user_input
