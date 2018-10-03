@@ -54,7 +54,7 @@ end
 
 
 def review
-  puts "Please put in wine name"
+  puts "Please put in wine name:"
   user_choice = gets.strip.downcase
 
   potential_matches = Wine.where("name like ?", "%#{user_choice}%")
@@ -64,6 +64,9 @@ def review
     puts potential_matches[0]['name']
     puts potential_matches[0]['year']
     yes_no = gets.chomp
+    if yes_no == 'yes'
+      create_review
+    end
   elsif potential_matches.length > 1
     list = potential_matches.each do |wine|
       "#{i}. #{wine['name']} -- #{wine['year']}"
@@ -77,6 +80,9 @@ def review
   end
 end
 
+def create_review
+
+end
 
 def recommendation
   puts "Here's your recommendation:"
