@@ -1,5 +1,5 @@
-HPCHARS = {gryffindor: [
-  {
+
+wizards = {
     "name": "Harry Potter",
     "species": "human",
     "gender": "male",
@@ -486,4 +486,3 @@ HPCHARS = {gryffindor: [
     "alive": true,
     "image": "http://hp-api.herokuapp.com/images/luna.jpg"
   }
-]}
