@@ -8,9 +8,9 @@ class CreateNpcs < ActiveRecord::Migration[5.0]
       t.string :family
       t.string :status
       t.string :job
-      t.string :personality
+      t.string :personality # Add probablity
       t.integer :hp
-      t.integer :wealth
+      t.integer :wealth # Add probability
     end
   end
 end
