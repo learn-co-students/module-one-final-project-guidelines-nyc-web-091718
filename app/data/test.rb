@@ -6,7 +6,7 @@ require 'pry'
 # binding.pry
 beers = CSV.parse(File.open('./app/data/beers.csv').read) #.to_json
 styles = CSV.parse(File.open('./app/data/styles.csv').read) #.to_json
-# binding.pry
+
 WIZARDS = [{
     "name": "Harry Potter",
     "species": "human",
