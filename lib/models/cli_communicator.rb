@@ -1,20 +1,14 @@
 require 'pry'
 
+
+
 def welcome
   puts "Hello soon-to-be wine connoisseur!"
   puts "Please enter your name" ###TODO: discuss how to build this out further
   name_response = gets.strip
-  # check_user(name_response)
-end
 
-def get_user_names
-  User.all.map do |user|
-    user.name
-  end
-end
-
-def check_user(name_response)
   user_name_array = get_user_names
+
   if user_name_array.include?(name_response)
     current_user = User.all.select do |user|
       user.name == name_response
@@ -24,6 +18,13 @@ def check_user(name_response)
   end
   current_user
 end
+
+def get_user_names
+  User.all.map do |user|
+    user.name
+  end
+end
+
 
 def get_initial_user_input
   puts "Would you like to SEARCH for a wine, REVIEW a wine, or get a RECOMMENDATION?"
@@ -90,7 +91,7 @@ def review
     puts potential_matches[0]['year']
     yes_no = gets.chomp
     if yes_no == 'yes'
-      create_review
+      potential_matches[0]
     end
   elsif potential_matches.length > 1
     puts "Which of these wines do you wish to review? (Enter number)"
@@ -98,20 +99,20 @@ def review
       puts "#{i+1}. #{wine['name']} -- #{wine['year']}"
     end
     id_input = gets.chomp #user chooses a numbered wine to review (i.e. 1. Merrvale)
-    create_review
+    potential_matches[id_input.to_i - 1]
   else
     puts "We can't seem to find your wine. Please try searching again"
     get_initial_user_input
   end
 end
 
-def create_review
+def create_review(user, wine)
   puts "On a scale of 1-5 how would you rate this wine (1 = worst, 5 = best)?"
   rating_input = gets.strip
   puts "Leave your comments here:"
   review_input = gets.strip
 
-  Review.create(user_id:"", wine_id: "", content: review_input, rating: rating_input)
+  Review.create(user_id: user.id, wine_id: wine.id, content: review_input, rating: rating_input)
 
   puts "Thanks for your review!"
 
