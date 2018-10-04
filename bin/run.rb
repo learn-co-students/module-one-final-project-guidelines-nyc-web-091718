@@ -31,6 +31,18 @@ initial_path_choice = get_initial_user_input
 
     elsif initial_path_choice == 'my wine reviews'
       user_reviews(user)
+      compiled_review_list = generated_review_list(user)
+      ### returns user's array of wine reviews
+
+      user_response_to_ud = update_delete_exit?
+      ### user response from update_delete_exit prompt
+        ### if statement to look at user responses
+        if user_response_to_ud == 'delete'
+          delete(compiled_review_list)
+
+        elsif user_response_to_ud == 'update'
+          update(compiled_review_list)
+        end
       #### Have option for update/delete
       keep_searching = anything_else
     else
