@@ -10,13 +10,12 @@ def welcome
   user_name_array = get_user_names
 
   if user_name_array.include?(name_response)
-    current_user = User.all.select do |user|
+    User.all.find do |user|
       user.name == name_response
     end
   else
-    current_user = User.create(name: name_response)
+    User.create(name: name_response)
   end
-  current_user
 end
 
 def get_user_names
@@ -30,8 +29,10 @@ def get_initial_user_input
   puts "Would you like to SEARCH for a wine, REVIEW a wine, or get a RECOMMENDATION?"
   puts "Type in an option below:"
   user_choice = gets.strip.downcase
+  user_choice
+end
 
-  if user_choice == 'search'
+  def search
     puts "Please pick a color: Red, White, or Pink"
     color_choice = gets.strip
     puts "Please pick a country:"
@@ -50,17 +51,6 @@ def get_initial_user_input
       puts "I can't find any wine like that, sorry bub"
     end
   end
-
-  if user_choice == 'review'
-    review
-
-  if user_choice == 'recommendation'
-    recommendation #Brennan added for method below
-  # elsif user_choice = 'exit'
-  #   exit
-  end
- end
-end
 
 def try_again
   puts "Did you find the wine of your dreams?"
@@ -90,6 +80,7 @@ def review
     puts potential_matches[0]['name']
     puts potential_matches[0]['year']
     yes_no = gets.chomp
+    binding.pry
     if yes_no == 'yes'
       potential_matches[0]
     end
@@ -127,17 +118,15 @@ end
 
 def recommendation
   puts "Here's your recommendation:"
-  wine = Wine.all.sample
-  puts wine.name
-  puts wine.year
-  puts wine.country
+  wine_rec = Wine.all.sample
+  puts wine_rec.name
+  puts wine_rec.year
+  puts wine_rec.country
 
   #make this a helper method eventually!
   puts "Is there anything else? (yes or no)"
   anything_else = gets.chomp
   if anything_else == "yes"
     get_initial_user_input
-  else
-    say_bye
   end
 end
