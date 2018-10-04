@@ -91,8 +91,8 @@ def review
     id_input = gets.chomp #user chooses a numbered wine to review (i.e. 1. Merrvale)
     potential_matches[id_input.to_i - 1]
   else
-    puts "We can't seem to find your wine. Please try searching again"
-    get_initial_user_input
+    puts "We can't seem to find your wine. Please try searching again:"
+    review
   end
 end
 
