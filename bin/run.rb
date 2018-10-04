@@ -29,8 +29,9 @@ initial_path_choice = get_initial_user_input
       recommendation
       keep_searching = anything_else
 
-    elsif initial_path_choice == 'my wines'
+    elsif initial_path_choice == 'my wine reviews'
       user_reviews(user)
+      #### Have option for update/delete
       keep_searching = anything_else
     else
       keep_searching = false

@@ -5,7 +5,7 @@ require 'pry'
 def welcome
   puts "Hello soon-to-be wine connoisseur!"
   puts "Please enter your name" ###TODO: discuss how to build this out further
-  name_response = gets.strip
+  name_response = gets.strip.capitalize
 
   user_name_array = get_user_names
 
@@ -26,7 +26,7 @@ end
 
 
 def get_initial_user_input
-  puts "Would you like to SEARCH for a wine, REVIEW a wine, get a RECOMMENDATION?, or go to MY WINES"
+  puts "Would you like to SEARCH for a wine, REVIEW a wine, get a RECOMMENDATION, or go to MY WINE REVIEWS"
   puts "Type in an option below:"
   user_choice = gets.strip.downcase
   user_choice
@@ -34,11 +34,11 @@ end
 
   def search
     puts "Please pick a color: Red, White, or Pink"
-    color_choice = gets.strip
+    color_choice = gets.strip.capitalize
     puts "Please pick a country:"
-    country_choice = gets.strip
+    country_choice = gets.strip.capitalize
     puts "Please pick a year:"
-    vintage_choice = gets.strip
+    vintage_choice = gets.strip.capitalize
 
     result = Wine.where(color: color_choice, country: country_choice, year: vintage_choice).all
     # "user_name = :user_name"
@@ -54,7 +54,7 @@ end
 
 def review
   puts "Please put in wine name:"
-  user_choice = gets.strip.downcase
+  user_choice = gets.strip.capitalize
 
   potential_matches = Wine.where("name like ?", "%#{user_choice}%")
 
@@ -73,8 +73,11 @@ def review
     potential_matches.each_with_index do |wine, i|
       puts "#{i+1}. #{wine['name']} -- #{wine['year']}"
     end
-    id_input = gets.chomp #user chooses a numbered wine to review (i.e. 1. Merrvale)
-    potential_matches[id_input.to_i - 1]
+    number_input = gets.chomp
+     if (number_input.to_i) > potential_matches.length
+       number_input = potential_matches.count
+     end
+    potential_matches[number_input.to_i - 1]
   else
     puts "We can't seem to find your wine. Please try searching again:"
     review
@@ -105,10 +108,6 @@ def user_reviews(user)
   user_review_list = Review.all.select do |review|
     review.user_id == user.id
   end
-
-
-
-
 
   user_review_list.each_with_index do |review, i|
     puts "************************"
