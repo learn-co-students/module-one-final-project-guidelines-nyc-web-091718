@@ -2,14 +2,13 @@
 require 'pry'
 
 class Wizard < ActiveRecord::Base
-belongs_to :house
+  belongs_to :house
+  has_many :styles, through: :house
 
+  def self.fav_beers(char)
+    
 
+  end
 
-def one(character)
-  puts "- Input a character!"
-  character = gets.chomp
-  
-end
 
 end
