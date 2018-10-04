@@ -1,6 +1,9 @@
 require 'pry'
 
+puts "run seed"
 def seed_houses
+  puts "seed_houses"
+  House.destroy_all
   House.create(name: "Gryffindor")
   House.create(name: "Slytherin")
   House.create(name: "Hufflepuff")
@@ -11,13 +14,16 @@ end
 
 
 def seed_wizards
+  puts "seed_wizards"
+  Wizard.destroy_all
   house_hash = {"Gryffindor" => 1, "Slytherin" => 2, "Hufflepuff" => 3, "Ravenclaw" => 4 }
   WIZARDS.each { |wiz| Wizard.create(name: wiz[:'name'], house_id: house_hash.values_at(wiz[:'house'])[0])}
 end
 
 def seed_styles
+  puts "seed_styles"
+  Style.destroy_all
   style_array = [4,4,3,4,2,2,3,3,1,2,1]
-
   i = 0
   STYLES.each {|style|
     Style.create(name: style[1], house_id: style_array[i])
@@ -25,6 +31,8 @@ def seed_styles
 end
 
 def seed_beers
+  puts "seed_beers"
+  Beer.destroy_all
   BEERS.each {|beer| Beer.create(name: beer[2],style_id: beer[3]=="-1" ? 11 : beer[3])}
 end
 
@@ -39,3 +47,4 @@ end
 #   h_style.each {|style| Housestyle.create(house_id: 3, style_id: style)}
 #   r_style.each {|style| Housestyle.create(house_id: 4, style_id: style)}
 # end
+puts "end seed"
