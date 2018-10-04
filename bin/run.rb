@@ -1,7 +1,11 @@
 require_relative '../config/environment'
 require 'pry'
+require 'colorize'
 
 # get_data
+
+a = Artii::Base.new :font => 'big'
+puts a.asciify("Iz  wine  o'clock").colorize(:red).colorize( :background => :light_white)
 
 user = welcome
 
@@ -17,7 +21,7 @@ initial_path_choice = get_initial_user_input
       wine = review
 
       if wine == false
-        puts "Sorry we couldn't find your wine"
+        puts "Sorry we couldn't find your wine".colorize(:red)
         initial_path_choice
       else
         create_review(user, wine)
