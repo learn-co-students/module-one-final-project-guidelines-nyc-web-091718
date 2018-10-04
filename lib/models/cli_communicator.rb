@@ -56,13 +56,13 @@ end
   end
 
 def review
-  puts "Please put in wine name:".colorize(:red)
+  puts "Perty plz put in wine name:".colorize(:red)
   user_choice = gets.strip.capitalize
 
   potential_matches = Wine.where("name like ?", "%#{user_choice}%")
 
   if potential_matches.length == 1
-    puts "Is this the wine you wish to review? (yes or no)".colorize(:red)
+    puts "Is this the wine you were psyched to review? (yes or no)".colorize(:red)
     puts ""
     puts potential_matches[0]['name']
     puts potential_matches[0]['year']
@@ -77,7 +77,7 @@ def review
       puts "#{i+1}. #{wine['name']} -- #{wine['year']}"
       puts ""
     end
-    puts "Which of these wines do you wish to review? (Enter number)".colorize(:red)
+    puts "Which of these wines do you vibe with best to review? (Enter number)".colorize(:red)
     puts ""
     number_input = gets.chomp
      if (number_input.to_i) > potential_matches.length
@@ -85,20 +85,20 @@ def review
      end
     potential_matches[number_input.to_i - 1]
   else
-    puts "We can't seem to find your wine. Please try searching again:".colorize(:white).colorize( :background => :red)
+    puts "We can't seem to find your wine. Womp womp womp wooooooomp. Please try searching again:".colorize(:white).colorize( :background => :red)
     review
   end
 end
 
 def create_review(user, wine)
-  puts "On a scale of 1-5 how would you rate this wine (1 = worst, 5 = best)?".colorize(:red)
+  puts "On a scale of 1-5 how would you rate this vino (1 = worst, 5 = best)?".colorize(:red)
   rating_input = gets.strip
   puts "Leave your comments here:".colorize(:red)
   review_input = gets.strip
 
   Review.create(user_id: user.id, wine_id: wine.id, content: review_input, rating: rating_input)
 
-  puts "Thanks for your review!".colorize(:red)
+  puts "Tanks for your review!".colorize(:red)
 end
 
 def recommendation
@@ -130,7 +130,7 @@ def generated_review_list(user)
     puts "#{review.content}"
     end
   else
-    puts "You don't have any reviews"
+    puts "You don't have any reviews. WUT."
   end
 end
 
@@ -147,7 +147,7 @@ def update_delete_exit?
 end
 
 def delete(compiled_review_list)
-  puts "Which review do you want to delete from your list above (ENTER NUMBER)?".colorize(:white).colorize( :background => :red)
+  puts "Which review do you want to delete from your list above my wine explorer (ENTER NUMBER)?".colorize(:white).colorize( :background => :red)
   user_delete_number = gets.strip
 
   Review.delete(compiled_review_list[user_delete_number.to_i - 1].id)
@@ -160,14 +160,14 @@ def update(compiled_review_list)
   puts "Leave your new comments here:".colorize(:red)
   review_input = gets.strip
 
-  puts "On a scale of 1-5 how would you rate this wine (1 = worst, 5 = best)?".colorize(:red)
+  puts "On a scale of 1-5 how would you rate this vino (1 = worst, 5 = best)?".colorize(:red)
   rating_input = gets.strip
 
   Review.update(compiled_review_list[user_update_number.to_i - 1].id, content: review_input, rating: rating_input )
 end
 
 def anything_else
-  puts "Is there anything else? (yes or no)".colorize(:white).colorize( :background => :red)
+  puts "Is there anything elsssssseeeee? (yes or no)".colorize(:white).colorize( :background => :red)
   anything_else = gets.chomp
   if anything_else == "yes"
     true
