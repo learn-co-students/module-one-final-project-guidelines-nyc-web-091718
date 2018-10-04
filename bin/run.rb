@@ -10,13 +10,30 @@ initial_path_choice = get_initial_user_input
     if initial_path_choice == 'search'
       search
       keep_searching = anything_else
+
     elsif initial_path_choice == 'review'
       wine = review
-      create_review(user, wine)
-      keep_searching = anything_else
+
+      if wine == false
+        puts "Sorry we couldn't find your wine"
+        initial_path_choice
+      else
+        create_review(user, wine)
+        keep_searching = anything_else
+      end
+
+
+
+
     elsif initial_path_choice == 'recommendation'
       recommendation
       keep_searching = anything_else
+
+    elsif initial_path_choice == 'my wines'
+      user_reviews(user)
+      keep_searching = anything_else
+    else
+      keep_searching = false
     end
 end
 

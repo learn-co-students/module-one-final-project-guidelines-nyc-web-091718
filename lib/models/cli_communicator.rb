@@ -26,7 +26,7 @@ end
 
 
 def get_initial_user_input
-  puts "Would you like to SEARCH for a wine, REVIEW a wine, or get a RECOMMENDATION?"
+  puts "Would you like to SEARCH for a wine, REVIEW a wine, get a RECOMMENDATION?, or go to MY WINES"
   puts "Type in an option below:"
   user_choice = gets.strip.downcase
   user_choice
@@ -52,23 +52,6 @@ end
     end
   end
 
-# def try_again
-#   puts "Did you find the wine of your dreams?"
-#   puts "Yes or No"
-#   user_choice = gets.strip.downcase
-#   if user_choice == 'yes'
-#     puts "Yay! Would you like to leave a review or get a quick recommendation?"
-#     user_choice = gets.strip.downcase
-#    end
-#     user_choice != 'no'
-# end
-
-def say_bye
-  puts 'coolio, bye!'
-end
-
-
-
 def review
   puts "Please put in wine name:"
   user_choice = gets.strip.downcase
@@ -82,6 +65,8 @@ def review
     yes_no = gets.chomp
     if yes_no == 'yes'
       potential_matches[0]
+    else
+      keep_searching = false ########## NEED TO REFACTOR ### Something in RUN file
     end
   elsif potential_matches.length > 1
     puts "Which of these wines do you wish to review? (Enter number)"
@@ -115,6 +100,31 @@ def recommendation
   puts wine_rec.country
 end
 
+
+def user_reviews(user)
+  user_review_list = Review.all.select do |review|
+    review.user_id == user.id
+  end
+
+
+
+
+
+  user_review_list.each_with_index do |review, i|
+    puts "************************"
+    puts "#{i+1}. Wine: #{find_wine_names_review(review)}"
+    puts "Your rating: #{review.rating}"
+    puts "#{review.content}"
+  end
+end
+
+def find_wine_names_review(review)
+  wine = Wine.all.select do |wine|
+  wine.id == review.wine_id
+  end
+  wine[0].name
+end
+
 def anything_else
   puts "Is there anything else? (yes or no)"
   anything_else = gets.chomp
@@ -123,4 +133,8 @@ def anything_else
   else
     false
   end
+end
+
+def say_bye
+  puts 'coolio, bye!'
 end
