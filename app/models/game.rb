@@ -21,7 +21,7 @@ class Game
    # create npc random
   end
 
-  def create_npc_custom
+  def create_npc_custom # DONE
     print "Name : "
     name = gets.chomp
     print "Race : "
@@ -33,7 +33,7 @@ class Game
     Npc.create_custom(input)
   end
 
-  def create_npc_random
+  def create_npc_random # DONE
     if @current_world != nil
       Npc.create_random(@current_world.id)
     else
@@ -46,7 +46,23 @@ class Game
     all_npcs.each {|n| puts n.name}
   end
 
-  def print_npc_by_name(name)
+  def find_npc_by_name(name)
+    like_name = "%#{name}%"
+    npc = Npc.where("name LIKE ?", like_name)
+    if npc.size == 1
+      return npc.first
+    elsif npc.size > 1
+      puts "Which #{name} were you looking for?"
+      npc.each_with_index {|n,i| puts "[#{i}]: #{n.name}"}
+      choice = gets.chomp
+      return npc[choice.to_i]
+    else
+      puts "Could not find #{name}"
+      return 0
+    end
+  end
+
+  def print_npc_by_name(name) # DONEish, Modify to use find_npc_by_name
     like_name = "%#{name}%"
     npc = Npc.where("name LIKE ?", like_name)
     # TODO when npc has multiple npcs in returned to it
@@ -55,6 +71,48 @@ class Game
     else
       puts "Could not find #{name}"
     end
+  end
+
+  def print_npc_stats(name)
+    npc = find_npc_by_name(name)
+    atr_hash = npc.attributes
+    atr_hash.each {|k,v| puts "#{k}: #{v}"}
+  end
+
+  def print_attributes_by_object(obj)
+    obj.attributes.each {|k,v| puts "#{k}: #{v}"}
+  end
+
+  def modify_npc_by_name(name)
+    npc = find_npc_by_name(name)
+    npc_atrs = npc.attributes.map {|k,v| k}
+    # print_attributes_by_object(npc)
+
+    modifying = true
+
+    while modifying
+      print_attributes_by_object(npc)
+      puts "\nEnter '!!!' to Exit"
+      print "Attribute: "
+      atr = gets.chomp
+      if atr == '!!!'
+        modifying = false
+        break
+      elsif npc_atrs.include? atr
+        print "New Value: "
+        val = gets.chomp # TODO make sure they enter right values
+        npc[atr.to_sym] = val
+        npc.save
+      else
+        puts "Invalid Attribute"
+      end
+      #binding.pry
+    end
+  end
+
+  def remove_npc_by_name(name)
+    npc = find_npc_by_name(name)
+    npc.delete
   end
 
   def world_menu(cmd) # cmd is an array
@@ -89,9 +147,15 @@ class Game
       when "all"; print_all_npcs;
       else; print_npc_by_name(cmd[1]);
       end
-    when "modify";  # by name; --> modify menu
-    when "remove";  # by name;
-    else; # User can enter "npc #{name} #{command}"
+    # when "modify";  # by name; --> modify menu
+    # when "remove";  # by name;
+    else # User can enter "npc #{name} #{command}"
+      #binding.pry
+      case cmd[1]
+      when "stats"; print_npc_stats(cmd[0]);
+      when "modify"; modify_npc_by_name(cmd[0]);
+      when "remove"; remove_npc_by_name(cmd[0]);
+      end
     end
   end
 
@@ -106,6 +170,7 @@ class Game
     when "help";  print_commands;
     when "world"; world_menu(rmain_cmd); # TODO STOPPED HERE
     when "town";  town_menu(rmain_cmd);
+    when "dungeon"; dungeon_menu(rmain_cmd);
     when "npc";   npc_menu(rmain_cmd);
     else; puts "#{cmd} is not a valid command."
     end
