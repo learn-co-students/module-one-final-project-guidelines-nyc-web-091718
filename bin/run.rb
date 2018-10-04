@@ -1,6 +1,8 @@
 require_relative '../config/environment'
 require 'pry'
 
+# get_data
+
 user = welcome
 
 keep_searching = true
@@ -51,12 +53,3 @@ initial_path_choice = get_initial_user_input
 end
 
 say_bye
-
-
-
-# keep_searching = true
-#
-# while keep_searching do
-#   get_initial_user_input
-#   keep_searching = try_again
-# end
