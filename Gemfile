@@ -9,3 +9,4 @@ gem "rest-client"
 gem 'dotenv'
 gem 'json'
 gem 'faker'
+gem 'colorize'

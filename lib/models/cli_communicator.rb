@@ -1,11 +1,11 @@
 require 'pry'
-
+require 'colorize'
 
 
 def welcome
-  puts "Hello soon-to-be wine connoisseur!"
+  puts "Hello soon-to-be wine connoisseur!".colorize(:white).colorize( :background => :red)
   puts "Please enter your name" ###TODO: discuss how to build this out further
-  name_response = gets.strip.capitalize
+  name_response = gets.strip
   User.find_or_create_by(name: name_response)
   # user_name_array = get_user_names
   #
@@ -26,7 +26,7 @@ end
 
 
 def get_initial_user_input
-  puts "Would you like to SEARCH for a wine, REVIEW a wine, get a RECOMMENDATION, or go to MY WINE REVIEWS"
+  puts "Would you like to SEARCH for a wine, REVIEW a wine, get a RECOMMENDATION, or go to MY WINE REVIEWS".colorize(:white).colorize( :background => :red)
   puts "Type in an option below:"
   user_choice = gets.strip.downcase
   user_choice
@@ -116,7 +116,7 @@ def generated_review_list(user)
   review_list_continued.each_with_index do |review, i|
     puts "************************"
     puts "#{i+1}. Wine: #{find_wine_names_review(review)}"
-    puts "Your rating: #{review.rating}"
+    puts "Your rating: *#{review.rating}*"
     puts "#{review.content}"
     end
   else
