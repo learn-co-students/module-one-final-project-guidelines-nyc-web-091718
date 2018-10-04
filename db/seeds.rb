@@ -194,20 +194,21 @@ wines =   [{"wine"=>"Rivers-Marie, Lore Vineyard Cabernet Sauvignon, Oakville",
  "lwin_11"=>10997192014}]
 end
 
-
-def create_wines
-  wines = setup_seed_data
-  wines.each do |wine|
-    wine_url = 'https://www.globalwinescore.com/wine-score/' + wine["wine_slug"]
-    Wine.create(name: wine['wine'],color: wine['color'], country: wine['country'],year: wine['vintage'],score: wine['score'], url: wine_url)
-  end
-end
-
-create_wines
+#
+# def create_wines
+#   wines = setup_seed_data
+#   wines.each do |wine|
+#     wine_url = 'https://www.globalwinescore.com/wine-score/' + wine["wine_slug"]
+#     Wine.create(name: wine['wine'],color: wine['color'], country: wine['country'],year: wine['vintage'],score: wine['score'], url: wine_url)
+#   end
+# end
+# create_wines
 
 def create_users
-  10.times do
+  20.times do
     User.create(name: Faker::SiliconValley.character)
+  20.times do
+    User.create(name: Faker::PrincessBride.character)
   end
 
 end
@@ -224,82 +225,82 @@ def setup_review_data
    {"user_id" => 4, "wine_id" => 6, "content" => "Perfect!", "rating" => 2},
    {"user_id" => 5, "wine_id" => 7, "content" => "If you prefer a heartier red, choose this", "rating" => 1},
    {"user_id" => 6, "wine_id" => 8, "content" => "We picked it up for the distinctive label", "rating" => 2},
-   {"user_id" => 7, "wine_id" => 9, "content" => "dry and refreshing", "rating" => 2},
-   {"user_id" => 8, "wine_id" => 10,"content" => "this reserve bubbly is full-bodied", "rating" => 3},
-   {"user_id" => 1, "wine_id" => 9,"content" => "This wine is light with a pleasant touch of sweetness
+   {"user_id" => 18, "wine_id" => 9, "content" => "dry and refreshing", "rating" => 2},
+   {"user_id" => 19, "wine_id" => 10,"content" => "this reserve bubbly is full-bodied", "rating" => 3},
+   {"user_id" => 19, "wine_id" => 9,"content" => "This wine is light with a pleasant touch of sweetness
 ", "rating" => 4},
-   {"user_id" => 2, "wine_id" => 8,"content" => "tastes especially fresh", "rating" => 1},
-   {"user_id" => 3, "wine_id" => 7,"content" => "strikes a nice balance", "rating" => 2},
-   {"user_id" => 4, "wine_id" => 2,"content" => "strikes a nice balance", "rating" => 5},
-   {"user_id" => 5, "wine_id" => 2,"content" => "We like the intense raspberry flavor and low alcohol", "rating" => 2},
-   {"user_id" => 6, "wine_id" => 2,"content" => "Black cherry and chocolate come to mind", "rating" => 3},
-   {"user_id" => 7, "wine_id" => 2,"content" => "We like the pear aromas and subtle sweetness", "rating" => 4},
-   {"user_id" => 8, "wine_id" => 2,"content" => "We like the mild sweetness and slight fizz", "rating" => 3},
-   {"user_id" => 9, "wine_id" => 2,"content" => "toasty Champagne-like notes", "rating" => 5},
-   {"user_id" => 10, "wine_id" => 2,"content" => "Elegant, sophisticated, and pretty", "rating" => 3},
-   {"user_id" => 1, "wine_id" => 2,"content" => "soft, balanced sweetness", "rating" => 4},
-   {"user_id" => 2, "wine_id" => 4,"content" => "melon notes and full body
+   {"user_id" => 17, "wine_id" => 8,"content" => "tastes especially fresh", "rating" => 1},
+   {"user_id" => 20, "wine_id" => 7,"content" => "strikes a nice balance", "rating" => 2},
+   {"user_id" => 20, "wine_id" => 2,"content" => "strikes a nice balance", "rating" => 5},
+   {"user_id" => 21, "wine_id" => 2,"content" => "We like the intense raspberry flavor and low alcohol", "rating" => 2},
+   {"user_id" => 16, "wine_id" => 2,"content" => "Black cherry and chocolate come to mind", "rating" => 3},
+   {"user_id" => 21, "wine_id" => 2,"content" => "We like the pear aromas and subtle sweetness", "rating" => 4},
+   {"user_id" => 22, "wine_id" => 2,"content" => "We like the mild sweetness and slight fizz", "rating" => 3},
+   {"user_id" => 15, "wine_id" => 2,"content" => "toasty Champagne-like notes", "rating" => 5},
+   {"user_id" => 22, "wine_id" => 2,"content" => "Elegant, sophisticated, and pretty", "rating" => 3},
+   {"user_id" => 23, "wine_id" => 2,"content" => "soft, balanced sweetness", "rating" => 4},
+   {"user_id" => 23, "wine_id" => 4,"content" => "melon notes and full body
 ", "rating" => 1},
-   {"user_id" => 3, "wine_id" => 4,"content" => "Yes, you can get high quality, tasty wine from a box", "rating" => 5},
-   {"user_id" => 4, "wine_id" => 4,"content" => "Juicy red-cherry fruit and a compelling hint of caramel greet the palate, framed by elegant, fine tannins", "rating" => 2},
-   {"user_id" => 5, "wine_id" => 4,"content" => "Ripe aromas of fig, blackberry and cassis are softened and sweetened by a slathering of oaky chocolate and vanilla. This is full, layered, intense and cushioned on the palate", "rating" => 3},
-   {"user_id" => 6, "wine_id" => 4,"content" => "tremendously delicious, balanced and complex botrytised white", "rating" => 4},
-   {"user_id" => 7, "wine_id" => 4,"content" => "Aromatic, dense and toasty, it deftly blends aromas and flavors", "rating" => 5},
-   {"user_id" => 8, "wine_id" => 4,"content" => "It has structure, density and considerable acidity that is still calming down. With 18 months in wood", "rating" => 1},
-   {"user_id" => 9, "wine_id" => 4,"content" => "Deep, dense and pure from the opening bell", "rating" => 2},
-   {"user_id" => 10, "wine_id" => 4,"content" => "Aromas of dark ripe black fruits are cool and moderately oaked. This feels massive on the palate but sensationally balanced.", "rating" => 5},
-   {"user_id" => 1, "wine_id" => 5,"content" => "Slightly gritty black-fruit aromas include a sweet note of pastry along with a hint of prune", "rating" => 3},
-   {"user_id" => 2, "wine_id" => 5,"content" => "Wall-to-wall saturation ensures that all corners of one's mouth are covered. Flavors of blackberry", "rating" => 3},
-   {"user_id" => 3, "wine_id" => 5,"content" => "Lush cedary black-fruit aromas are luxe and offer notes of marzipan and vanilla. This bruiser is massive and tannic on the palate, but still lush and friendly.", "rating" => 3},
-   {"user_id" => 4, "wine_id" => 5,"content" => "You'll find striking minerality underscoring chunky black fruits. Accents of citrus and graphite comingle, with exceptional midpalate", "rating" => 3},
-   {"user_id" => 5, "wine_id" => 5,"content" => "The producer sources from two blocks of the vineyard for this wine—one at a high elevation, which contributes bright acidity. Crunchy cranberry, pomegranate and orange peel flavors ", "rating" => 3},
-   {"user_id" => 6, "wine_id" => 5,"content" => "Elegance, complexity and structure come together in this drop-dead gorgeous winethat ranks among the world's greatest whites. It opens with sublime yellow spring flower", "rating" => 3},
-   {"user_id" => 7, "wine_id" => 5,"content" => "this supple well-balanced effort blends flavors of mocha, cherry, vanilla and breakfast tea.", "rating" => 3},
-   {"user_id" => 8, "wine_id" => 5,"content" => "This wine is in peak condition", "rating" => 3},
-   {"user_id" => 9, "wine_id" => 5,"content" => "The fruit is all there as well: dried berries and hints of black-plum skins.", "rating" => 2},
-   {"user_id" => 10, "wine_id" => 5,"content" => "With its sophisticated mix of mineral, acid and tart fruits, this seductive effort pleases from start to finish.", "rating" => 1},
-   {"user_id" => 1, "wine_id" => 3,"content" => "	First made in 2006, this succulent luscious wine is all about minerality.", "rating" => 1},
-   {"user_id" => 2, "wine_id" => 3,"content" => "It's got a rich core of butterscotch and the seemingly endless layers of subtle flavors", "rating" => 2},
-   {"user_id" => 3, "wine_id" => 3,"content" => "	This blockbuster, powerhouse of a wine suggests blueberry pie and chocolate as it opens in the glass.", "rating" => 4},
-   {"user_id" => 4, "wine_id" => 3,"content" => "On the palate, it's smooth and seductively silky, offering complex cedar", "rating" => 5},
-   {"user_id" => 5, "wine_id" => 3,"content" => "Nicely oaked blackberry, licorice, vanilla and charred aromas are smooth and sultry.", "rating" => 5},
-   {"user_id" => 6, "wine_id" => 3,"content" => "Nicely oaked blackberry, licorice, vanilla and charred aromas are smooth and sultry.", "rating" => 3},
-   {"user_id" => 7, "wine_id" => 3,"content" => "Forward barrel-spice and mocha flavors", "rating" => 3},
-   {"user_id" => 8, "wine_id" => 6,"content" => "this is a magnificent wine. Powered by both fruit tannins and the 28 months of new wood aging, it is darkly rich", "rating" => 5},
-   {"user_id" => 9, "wine_id" => 6,"content" => "This fresh and lively medium-bodied wine is beautifully crafted, with cherry blossom aromas and tangy acidity. Layered and seductive", "rating" => 3},
-   {"user_id" => 10, "wine_id" => 6,"content" => "Ruby grapefruit-red, it's sultry with strawberry, watermelon, orange zest and salty spice flavor", "rating" => 3},
-   {"user_id" => 1, "wine_id" => 6,"content" => "Alluring, complex and powerful aromas of grilled meat, berries, tea, smoke, vanilla and spice cover every base. An intense palate is concentrated but still elegant. Blackberry, molasses", "rating" => 1},
-   {"user_id" => 2, "wine_id" => 6,"content" => "Tarry blackberry and cheesy oak aromas are appropriate for a wine of this size and magnitude", "rating" => 3},
-   {"user_id" => 3, "wine_id" => 6,"content" => "The apogee of this ambitious winery's white wine efforts, this bottling of just two barrels of Clone 5 shows focused marzipan, marcona almond and white peach notes on the nose", "rating" => 2},
-   {"user_id" => 4, "wine_id" => 6,"content" => "Adam Comartin heads 1,100 feet up into the mountains to source fruit for this tremendous wine", "rating" => 3},
-   {"user_id" => 5, "wine_id" => 7,"content" => "medium-bodied, silky wine the potential to drink well through at least 2025. Hickory smoke outlines white peach", "rating" => 3},
-   {"user_id" => 6, "wine_id" => 7,"content" => "Here are lovely aromatics, with grape jelly, rose petals and plum in the nose", "rating" => 3},
-   {"user_id" => 7, "wine_id" => 7,"content" => "Focused and dense, this intense wine captures the essence of ripe raspberries. Aged in 50% new French oak, it's got a strong vein of coffee and mocha.", "rating" => 3},
+   {"user_id" => 23, "wine_id" => 4,"content" => "Yes, you can get high quality, tasty wine from a box", "rating" => 5},
+   {"user_id" => 24, "wine_id" => 4,"content" => "Juicy red-cherry fruit and a compelling hint of caramel greet the palate, framed by elegant, fine tannins", "rating" => 2},
+   {"user_id" => 14, "wine_id" => 4,"content" => "Ripe aromas of fig, blackberry and cassis are softened and sweetened by a slathering of oaky chocolate and vanilla. This is full, layered, intense and cushioned on the palate", "rating" => 3},
+   {"user_id" => 24, "wine_id" => 4,"content" => "tremendously delicious, balanced and complex botrytised white", "rating" => 4},
+   {"user_id" => 14, "wine_id" => 4,"content" => "Aromatic, dense and toasty, it deftly blends aromas and flavors", "rating" => 5},
+   {"user_id" => 25, "wine_id" => 4,"content" => "It has structure, density and considerable acidity that is still calming down. With 18 months in wood", "rating" => 1},
+   {"user_id" => 25, "wine_id" => 4,"content" => "Deep, dense and pure from the opening bell", "rating" => 2},
+   {"user_id" => 15, "wine_id" => 4,"content" => "Aromas of dark ripe black fruits are cool and moderately oaked. This feels massive on the palate but sensationally balanced.", "rating" => 5},
+   {"user_id" => 26, "wine_id" => 5,"content" => "Slightly gritty black-fruit aromas include a sweet note of pastry along with a hint of prune", "rating" => 3},
+   {"user_id" => 13, "wine_id" => 5,"content" => "Wall-to-wall saturation ensures that all corners of one's mouth are covered. Flavors of blackberry", "rating" => 3},
+   {"user_id" => 26, "wine_id" => 5,"content" => "Lush cedary black-fruit aromas are luxe and offer notes of marzipan and vanilla. This bruiser is massive and tannic on the palate, but still lush and friendly.", "rating" => 3},
+   {"user_id" => 27, "wine_id" => 5,"content" => "You'll find striking minerality underscoring chunky black fruits. Accents of citrus and graphite comingle, with exceptional midpalate", "rating" => 3},
+   {"user_id" => 27, "wine_id" => 5,"content" => "The producer sources from two blocks of the vineyard for this wine—one at a high elevation, which contributes bright acidity. Crunchy cranberry, pomegranate and orange peel flavors ", "rating" => 3},
+   {"user_id" => 13, "wine_id" => 5,"content" => "Elegance, complexity and structure come together in this drop-dead gorgeous winethat ranks among the world's greatest whites. It opens with sublime yellow spring flower", "rating" => 3},
+   {"user_id" => 28, "wine_id" => 5,"content" => "this supple well-balanced effort blends flavors of mocha, cherry, vanilla and breakfast tea.", "rating" => 3},
+   {"user_id" => 28, "wine_id" => 5,"content" => "This wine is in peak condition", "rating" => 3},
+   {"user_id" => 28, "wine_id" => 5,"content" => "The fruit is all there as well: dried berries and hints of black-plum skins.", "rating" => 2},
+   {"user_id" => 29, "wine_id" => 5,"content" => "With its sophisticated mix of mineral, acid and tart fruits, this seductive effort pleases from start to finish.", "rating" => 1},
+   {"user_id" =>29, "wine_id" => 3,"content" => "	First made in 2006, this succulent luscious wine is all about minerality.", "rating" => 1},
+   {"user_id" =>29, "wine_id" => 3,"content" => "It's got a rich core of butterscotch and the seemingly endless layers of subtle flavors", "rating" => 2},
+   {"user_id" => 30, "wine_id" => 3,"content" => "	This blockbuster, powerhouse of a wine suggests blueberry pie and chocolate as it opens in the glass.", "rating" => 4},
+   {"user_id" => 30, "wine_id" => 3,"content" => "On the palate, it's smooth and seductively silky, offering complex cedar", "rating" => 5},
+   {"user_id" => 12, "wine_id" => 3,"content" => "Nicely oaked blackberry, licorice, vanilla and charred aromas are smooth and sultry.", "rating" => 5},
+   {"user_id" => 31, "wine_id" => 3,"content" => "Nicely oaked blackberry, licorice, vanilla and charred aromas are smooth and sultry.", "rating" => 3},
+   {"user_id" => 12, "wine_id" => 3,"content" => "Forward barrel-spice and mocha flavors", "rating" => 3},
+   {"user_id" => 31, "wine_id" => 6,"content" => "this is a magnificent wine. Powered by both fruit tannins and the 28 months of new wood aging, it is darkly rich", "rating" => 5},
+   {"user_id" => 11, "wine_id" => 6,"content" => "This fresh and lively medium-bodied wine is beautifully crafted, with cherry blossom aromas and tangy acidity. Layered and seductive", "rating" => 3},
+   {"user_id" => 31, "wine_id" => 6,"content" => "Ruby grapefruit-red, it's sultry with strawberry, watermelon, orange zest and salty spice flavor", "rating" => 3},
+   {"user_id" => 32, "wine_id" => 6,"content" => "Alluring, complex and powerful aromas of grilled meat, berries, tea, smoke, vanilla and spice cover every base. An intense palate is concentrated but still elegant. Blackberry, molasses", "rating" => 1},
+   {"user_id" => 33, "wine_id" => 6,"content" => "Tarry blackberry and cheesy oak aromas are appropriate for a wine of this size and magnitude", "rating" => 3},
+   {"user_id" => 10, "wine_id" => 6,"content" => "The apogee of this ambitious winery's white wine efforts, this bottling of just two barrels of Clone 5 shows focused marzipan, marcona almond and white peach notes on the nose", "rating" => 2},
+   {"user_id" => 33, "wine_id" => 6,"content" => "Adam Comartin heads 1,100 feet up into the mountains to source fruit for this tremendous wine", "rating" => 3},
+   {"user_id" => 33, "wine_id" => 7,"content" => "medium-bodied, silky wine the potential to drink well through at least 2025. Hickory smoke outlines white peach", "rating" => 3},
+   {"user_id" => 9, "wine_id" => 7,"content" => "Here are lovely aromatics, with grape jelly, rose petals and plum in the nose", "rating" => 3},
+   {"user_id" => 34, "wine_id" => 7,"content" => "Focused and dense, this intense wine captures the essence of ripe raspberries. Aged in 50% new French oak, it's got a strong vein of coffee and mocha.", "rating" => 3},
    {"user_id" => 8, "wine_id" => 7,"content" => "The palate abounds with energy, driving black raspberry fruit ", "rating" => 3},
-   {"user_id" => 9, "wine_id" => 7,"content" => "earth shaking aromas of black-olive brine, tapenade, green olive, stargazer lilies, orange peel and crushed gravel", "rating" => 3},
-   {"user_id" => 10, "wine_id" => 7,"content" => "In the mouth it is balanced with soft tannins mingling", "rating" => 3},
-   {"user_id" => 1, "wine_id" => 8,"content" => "Steely and perfumed, this wine sees only 20% new French oak", "rating" => 4},
-   {"user_id" => 2, "wine_id" => 8,"content" => "Pale in color, this is nutty in character, with a warm and rounded hint of red fruits", "rating" => 3},
-   {"user_id" => 3, "wine_id" => 8,"content" => "The palate is generous in flavor and feel, showing a fine sense of balance", "rating" => 3},
-   {"user_id" => 4, "wine_id" => 8,"content" => "Forest floor, tilled soil, mature berry and a whiff of new leather combine on this. The ripe palate offers fleshy black cherry, dried aromatic herb and tobacco, while fine-grained tannins", "rating" => 3},
-   {"user_id" => 5, "wine_id" => 8,"content" => "Gingery spice notes accent fresh pear and melon fruit in this medium- to full-bodied wine", "rating" => 3},
-   {"user_id" => 6, "wine_id" => 9,"content" => "This comes across wide and expansive as it lazily exudes oily aromas of hazelnut and toffee", "rating" => 5},
-   {"user_id" => 7, "wine_id" => 9,"content" => "A plump palate is not overly cutting or demanding, while flavors of lightly salted nuts and buttered toast", "rating" => 3},
-   {"user_id" => 8, "wine_id" => 9,"content" => "This is an aromatic brooder with aromas of scorched earth, plum, dried flowers and green herbs.", "rating" => 3},
-   {"user_id" => 9, "wine_id" => 9,"content" => "Aromas of dark-skinned berry, rose and wild herb lead the nose", "rating" => 3},
-   {"user_id" => 10, "wine_id" => 9,"content" => "Sunbaked earth, ripe berry, baking spice and a whiff of menthol meld in the glass. The juicy palate offers red cherry, pomegranate, star anise, mocha and a hint of tobacco alongside fine-grained tannins", "rating" => 4},
-   {"user_id" => 1, "wine_id" => 10,"content" => "this is a perennial classic for the winery", "rating" => 3},
-   {"user_id" => 2, "wine_id" => 10,"content" => "opens with aromas of espresso, plum cake, toast and dark spice. The hearty palate offers blackberry jam, licorice, vanilla and mocha alongside firm fine-grained tannins", "rating" => 3},
-   {"user_id" => 3, "wine_id" => 10,"content" => "packed with minerality and considerable weight. The tight texture and almost tannic character will soften over the next few months", "rating" => 2},
-   {"user_id" => 4, "wine_id" => 10,"content" => "With its light color and cool feel, this well-balanced wine comes from a parcel of 30-year-old vines", "rating" => 2},
-   {"user_id" => 5, "wine_id" => 10,"content" => "There's a lot to like in this nicely priced white, a blend of several regional vineyards. A taste of hazelnut expands on the palate to meet creamy Tahitian vanilla", "rating" => 2},
-   {"user_id" => 6, "wine_id" => 10,"content" => "wood spice aromas start out up front", "rating" => 1},
-   {"user_id" => 7, "wine_id" => 10,"content" => "Delicious while also young and textured, this wine comes from biodynamically grown grapes", "rating" => 1},
-   {"user_id" => 8, "wine_id" => 10,"content" => "While exuberantly fruity, almost tropical on the nose, there's a crystalline edge", "rating" => 1},
-   {"user_id" => 9, "wine_id" => 10,"content" => "aromas of roasted coffee bean, leather, tobacco and dark woodland berry", "rating" => 3},
-   {"user_id" => 10, "wine_id" => 10,"content" => "Concentrated, ripe blackberry and cassis aromas come with peppery spice and cedary oak notes. This is big and generous on the palate", "rating" => 3},
-   {"user_id" => 1, "wine_id" => 10,"content" => "This feels lively on the palate, albeit tartaric. Oaky plum, cassis and vanilla flavors finish full", "rating" => 3},
-   {"user_id" => 2, "wine_id" => 10,"content" => "This is a super-ripe, still very young wine. It's showing all its concentrated fruits, wood aging flavors and dense texture as well as the firm tannins that will allow it to age", "rating" => 3},
+   {"user_id" => 34, "wine_id" => 7,"content" => "earth shaking aromas of black-olive brine, tapenade, green olive, stargazer lilies, orange peel and crushed gravel", "rating" => 3},
+   {"user_id" => 7, "wine_id" => 7,"content" => "In the mouth it is balanced with soft tannins mingling", "rating" => 3},
+   {"user_id" => 35, "wine_id" => 8,"content" => "Steely and perfumed, this wine sees only 20% new French oak", "rating" => 4},
+   {"user_id" => 35, "wine_id" => 8,"content" => "Pale in color, this is nutty in character, with a warm and rounded hint of red fruits", "rating" => 3},
+   {"user_id" => 35, "wine_id" => 8,"content" => "The palate is generous in flavor and feel, showing a fine sense of balance", "rating" => 3},
+   {"user_id" => 35, "wine_id" => 8,"content" => "Forest floor, tilled soil, mature berry and a whiff of new leather combine on this. The ripe palate offers fleshy black cherry, dried aromatic herb and tobacco, while fine-grained tannins", "rating" => 3},
+   {"user_id" => 36, "wine_id" => 8,"content" => "Gingery spice notes accent fresh pear and melon fruit in this medium- to full-bodied wine", "rating" => 3},
+   {"user_id" => 36, "wine_id" => 9,"content" => "This comes across wide and expansive as it lazily exudes oily aromas of hazelnut and toffee", "rating" => 5},
+   {"user_id" => 36, "wine_id" => 9,"content" => "A plump palate is not overly cutting or demanding, while flavors of lightly salted nuts and buttered toast", "rating" => 3},
+   {"user_id" => 36, "wine_id" => 9,"content" => "This is an aromatic brooder with aromas of scorched earth, plum, dried flowers and green herbs.", "rating" => 3},
+   {"user_id" => 37, "wine_id" => 9,"content" => "Aromas of dark-skinned berry, rose and wild herb lead the nose", "rating" => 3},
+   {"user_id" => 37, "wine_id" => 9,"content" => "Sunbaked earth, ripe berry, baking spice and a whiff of menthol meld in the glass. The juicy palate offers red cherry, pomegranate, star anise, mocha and a hint of tobacco alongside fine-grained tannins", "rating" => 4},
+   {"user_id" => 37, "wine_id" => 10,"content" => "this is a perennial classic for the winery", "rating" => 3},
+   {"user_id" => 37, "wine_id" => 10,"content" => "opens with aromas of espresso, plum cake, toast and dark spice. The hearty palate offers blackberry jam, licorice, vanilla and mocha alongside firm fine-grained tannins", "rating" => 3},
+   {"user_id" => 37, "wine_id" => 10,"content" => "packed with minerality and considerable weight. The tight texture and almost tannic character will soften over the next few months", "rating" => 2},
+   {"user_id" => 38, "wine_id" => 10,"content" => "With its light color and cool feel, this well-balanced wine comes from a parcel of 30-year-old vines", "rating" => 2},
+   {"user_id" => 38, "wine_id" => 10,"content" => "There's a lot to like in this nicely priced white, a blend of several regional vineyards. A taste of hazelnut expands on the palate to meet creamy Tahitian vanilla", "rating" => 2},
+   {"user_id" => 38, "wine_id" => 10,"content" => "wood spice aromas start out up front", "rating" => 1},
+   {"user_id" => 39, "wine_id" => 10,"content" => "Delicious while also young and textured, this wine comes from biodynamically grown grapes", "rating" => 1},
+   {"user_id" => 39, "wine_id" => 10,"content" => "While exuberantly fruity, almost tropical on the nose, there's a crystalline edge", "rating" => 1},
+   {"user_id" => 39, "wine_id" => 10,"content" => "aromas of roasted coffee bean, leather, tobacco and dark woodland berry", "rating" => 3},
+   {"user_id" => 40, "wine_id" => 10,"content" => "Concentrated, ripe blackberry and cassis aromas come with peppery spice and cedary oak notes. This is big and generous on the palate", "rating" => 3},
+   {"user_id" => 40, "wine_id" => 10,"content" => "This feels lively on the palate, albeit tartaric. Oaky plum, cassis and vanilla flavors finish full", "rating" => 3},
+   {"user_id" => 40, "wine_id" => 10,"content" => "This is a super-ripe, still very young wine. It's showing all its concentrated fruits, wood aging flavors and dense texture as well as the firm tannins that will allow it to age", "rating" => 3},
  ]
 end
 
