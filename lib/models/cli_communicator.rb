@@ -52,16 +52,16 @@ end
     end
   end
 
-def try_again
-  puts "Did you find the wine of your dreams?"
-  puts "Yes or No"
-  user_choice = gets.strip.downcase
-  if user_choice == 'yes'
-    puts "Yay! Would you like to leave a review or get a quick recommendation?"
-    user_choice = gets.strip.downcase
-   end
-    user_choice != 'no'
-end
+# def try_again
+#   puts "Did you find the wine of your dreams?"
+#   puts "Yes or No"
+#   user_choice = gets.strip.downcase
+#   if user_choice == 'yes'
+#     puts "Yay! Would you like to leave a review or get a quick recommendation?"
+#     user_choice = gets.strip.downcase
+#    end
+#     user_choice != 'no'
+# end
 
 def say_bye
   puts 'coolio, bye!'
@@ -105,12 +105,6 @@ def create_review(user, wine)
   Review.create(user_id: user.id, wine_id: wine.id, content: review_input, rating: rating_input)
 
   puts "Thanks for your review!"
-
-  puts "Is there anything else? (yes or no)"
-  anything_else = gets.chomp
-  if anything_else == "yes"
-    get_initial_user_input
-  end
 end
 
 def recommendation
@@ -119,11 +113,14 @@ def recommendation
   puts wine_rec.name
   puts wine_rec.year
   puts wine_rec.country
+end
 
-  #make this a helper method eventually!
+def anything_else
   puts "Is there anything else? (yes or no)"
   anything_else = gets.chomp
   if anything_else == "yes"
-    get_initial_user_input
+    true
+  else
+    false
   end
 end
