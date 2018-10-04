@@ -10,6 +10,6 @@ gem "require_relative"
 gem 'csv'
 gem 'json'
 gem 'rake'
-gem 'require_all'
+
 
 # gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'

@@ -2,49 +2,32 @@ require 'pry'
 require './app/data/test.rb'
 
 
-
-def one(character)
-  puts "- Input a character!"
-  character = gets.chomp
-end
-
-def two
-  puts "- Input a beer!"
-end
-
-def three
-  puts
-end
-
-def four
-
-end
-
-
 def welcome
 puts "Welcome to Wizard Alcoholics!"
 puts "- To see what brew your favourite wizard is enjoying, type 1.
       - To see what house you belong in based on your preferences, type 2.
       - To give your wizard a beer & see what your wizard's reaction is, type 3.
-        - Input wizard & beer (ex. Harry Potter, Pumpkin Beer)
       - To receive recommendations, type 4."
 
   input = gets.chomp
   if input == 1
-    one
+    puts "Input a character!"
+    char = gets.chomp
+    fav_beers(char)
   elsif input == 2
-    two
+    puts " Input a beer!"
+    beer = gets.chomp
+    sorting_beer(beer)
   elsif input == 3
-    three
+    puts "Input a wizard & a beer! /n
+              (ex. Harry Potter, Pumpkin Beer)"
+    charbeer = gets.chomp
+    drinking_wiz(charbeer)
   elsif input == 4
-    four
+    puts "Input a beer, and you shall get recommendations!"
+    beer = gets.chomp
+    beer_rec(beer)
   else
     puts "Invalid input"
   end
-end
-
-def seed_db
-
-  WIZARDS.each  {|wiz| wiz[:name]}
-
 end
