@@ -80,7 +80,6 @@ def review
     puts potential_matches[0]['name']
     puts potential_matches[0]['year']
     yes_no = gets.chomp
-    binding.pry
     if yes_no == 'yes'
       potential_matches[0]
     end
@@ -111,8 +110,6 @@ def create_review(user, wine)
   anything_else = gets.chomp
   if anything_else == "yes"
     get_initial_user_input
-  else
-    say_bye
   end
 end
 
