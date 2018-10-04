@@ -115,7 +115,7 @@ def generated_review_list(user)
   if review_list_continued.length != 0
   review_list_continued.each_with_index do |review, i|
     puts "************************"
-    puts "#{i+1}. Wine: #{find_wine_names_review(review)}"
+    puts "#{i+1}. Wine: #{find_wine_names_review(review)}".colorize(:white).colorize( :background => :red)
     puts "Your rating: *#{review.rating}*"
     puts "#{review.content}"
     end
