@@ -27,6 +27,12 @@ class Game
     Npc.create_custom(input)
   end
 
+  def create_world
+    print "Enter the name of your World: "
+    name = gets.chomp
+    World.create(name: name)
+  end
+
   def create_npc_random
     Npc.create_random(@current_world.id)
   end
@@ -78,7 +84,7 @@ class Game
     choice = gets.chomp
     case choice
     when '0'
-      # Makes New World
+      create_world
     else
       @current_world = World.find {|w| w.id == choice.to_i}
     end

@@ -1,5 +1,6 @@
 class Npc < ActiveRecord::Base
   belongs_to :world
+  belongs_to :town
 
   def self.create_random(world_id)
     name = Faker::Name.unique.name

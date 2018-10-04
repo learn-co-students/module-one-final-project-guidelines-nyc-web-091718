@@ -8,3 +8,8 @@ class ApiStuff
 end
 
 # ApiController.request_and_parse()
+
+# TODO: Create low/medium/high lvl chests
+# TODO: Make towns, npcs belong to town
+# TODO: Make Player Characters
+# TODO: 
