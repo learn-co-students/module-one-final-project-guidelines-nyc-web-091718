@@ -1,5 +1,4 @@
-require 'pry'
-class CreateHousestyles < ActiveRecord::Migration[5.0]
+class CreateHouseStyles < ActiveRecord::Migration[5.0]
   def change
     create_table :housestyles do |t|
       t.integer :house_id

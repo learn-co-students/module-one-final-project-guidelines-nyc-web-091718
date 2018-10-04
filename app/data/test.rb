@@ -4,8 +4,10 @@ require 'json'
 require 'pry'
 
 # binding.pry
-beers = CSV.parse(File.open('./app/data/beers.csv').read) #.to_json
-styles = CSV.parse(File.open('./app/data/styles.csv').read) #.to_json
+# "id","brewery_id","name","style_id","styles_id","abv","ibu","srm","upc","filepath","descript","last_mod"
+BEERS = CSV.parse(File.open('./app/data/beers.csv').read) #.to_json
+
+STYLES = CSV.parse(File.open('./app/data/styles.csv').read) #.to_json
 
 WIZARDS = [{
     "name": "Harry Potter",

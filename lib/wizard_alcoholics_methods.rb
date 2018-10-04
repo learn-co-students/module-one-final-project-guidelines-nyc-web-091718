@@ -9,7 +9,7 @@ def one(character)
 end
 
 def two
-  puts "- Input a beer!"
+  puts "* Input a beer!"
 end
 
 def three

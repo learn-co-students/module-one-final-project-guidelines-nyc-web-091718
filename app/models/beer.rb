@@ -1,6 +1,6 @@
 require './app/data/test.rb'
 
 class Beer < ActiveRecord::Base
-belongs_to :styles
+belongs_to :style
 
 end
