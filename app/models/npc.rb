@@ -10,11 +10,11 @@ class Npc < ActiveRecord::Base
     Npc.create(name: name, race: race, age: age, world_id: world_id)
   end
 
-  def self.create_custom(input)
+  def self.create_custom(input, world_id)
     name = input[0]
     race = input[1]
     age = input[2].to_i
-
-    Npc.create(name: name, race: race, age: age)
+    town_id = input[3].to_i
+    Npc.create(name: name, race: race, age: age, world_id: world_id, town_id: town_id)
   end
 end

@@ -37,10 +37,25 @@ class Game
     Npc.create_random(@current_world.id)
   end
 
+  # TODO: ADD THESE METHODS TO THE DO COMMAND LIST
+
+  def create_town_random
+    Town.create_random(@current_world.id)
+  end
+
+  def create_town_custom
+    Town.create_cusom(@current_world.id)
+  end
+
+
+
+  # TODO: METHODS TO ADD TO COMMAND LIST ARE ABOVE
+
   def print_all_npcs
     puts Npc.all
   end
 
+    # TODO: Do not touch
   def do_command(cmd)
     split_cmd = cmd.split
     case split_cmd[0]
