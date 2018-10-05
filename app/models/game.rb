@@ -242,9 +242,10 @@ class Game
       case cmd[1]
       when "all"; print_all(Dungeon).each {|t| puts t};
       end
+    when "tree";
+      ApiStuff.pick_a_dungeon
     else
       case cmd[1]
-      when "tree";
       when "modify";  # by name; --> modify menu
       when "remove";  # by name;
         d = find_obj_by_name(Dungeon, cmd[0])
