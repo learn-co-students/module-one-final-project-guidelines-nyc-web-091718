@@ -158,18 +158,51 @@ class Game
     obj.delete
   end
 
+  def tree_print
+    children = []
+    binding.pry
+  end
+
+  def create_world
+    print "Enter the name of your World: "
+    name = gets.chomp
+    @current_world = World.create(name: name)
+  end
+
+  def create_town
+    print "Enter the name of your Town: "
+    name = gets.chomp
+    @current_town = Town.create(name: name)
+  end
+
+  def create_dungeon_random
+    if @current_world != nil
+      Dungeon.create_random(@current_world.id)
+    else
+      Dungeon.create_random(nil)
+    end
+  end
+
+  def upcomming_feature
+    puts "This feature is on its way";
+  end
+
   def world_menu(cmd) # cmd is an array
     case cmd[0]
-    when "create";  # custom;
+    when "create";  create_world; # custom;
     when "print";   # attributes, towns;
       case cmd[1]
       when "all"; print_all(World).each {|w| puts w};
+      when "current";
+        if @current_world != nil
+           puts @current_world.name
+         end
       end
-    when "switch";  # --> switch world menu
+    when "switch";  world_select;# --> switch world menu
     else
       case cmd[1]
-      when "tree";  # prints everything in this world
-      when "modify";
+      when "tree"; # tree_print;# prints everything in this world
+      when "modify"; upcomming_feature;
       when "remove";
         w = find_obj_by_name(World, cmd[0])
         remove_by_obj(w)
@@ -179,10 +212,11 @@ class Game
 
   def town_menu(cmd) # cmd is an array
     case cmd[0]
-    when "create";  # custom, random;
+    when "create"; create_town; # custom, random;
     when "print";   # attributes, citizens;
       case cmd[1]
       when "all"; print_all(Town).each {|t| puts t};
+      end
     else
       case cmd[1]
       when "modify";  # by name; --> modify menu
@@ -195,10 +229,14 @@ class Game
 
   def dungeon_menu(cmd) # cmd is an array
     case cmd[0]
-    when "create";  # custom, random;
+    when "create";
+      case cmd[1]
+      when "random"; create_dungeon_random;
+      end
     when "print";   # attributes, citizens;
       case cmd[1]
       when "all"; print_all(Dungeon).each {|t| puts t};
+      end
     else
       case cmd[1]
       when "tree";
@@ -285,16 +323,10 @@ class Game
     end
   end
 
-  def create_world
-    print "Enter the name of your World: "
-    name = gets.chomp
-    World.create(name: name)
-  end
-
   def world_select
     puts "Select a world"
     puts "[0] New World"
-    World.all.each do |w|
+    World.all.each_with_index do |w,i|
       puts "[#{w.id}] #{w.name}"
     end
     print "Select World: "
