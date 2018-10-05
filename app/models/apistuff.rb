@@ -18,6 +18,6 @@ end
 # TODO: Add dungeon, monsters, associations for them as well
 # TODO: Make wilderness (NPCs with no town/Monsters with no dungeon)
 # TODO: generate random, but gives user a choice to reroll
-
+# TODO: make an inventory that interacts with chests. 1 chest per dung
 
 # TODO: Make a "What is going on in their head meme" with trumpets
