@@ -10,6 +10,7 @@ gem "require_relative"
 gem 'csv'
 gem 'json'
 gem 'rake'
+gem 'colorize'
 
 
 # gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'

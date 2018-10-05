@@ -1,6 +1,6 @@
 require 'pry'
 
-puts "run seed"
+# puts "run seeds"
 def seed_houses
   puts "seed_houses"
   House.destroy_all
@@ -23,12 +23,22 @@ end
 def seed_styles
   puts "seed_styles"
   Style.destroy_all
-  style_array = [4,4,3,4,2,2,3,3,1,2,1]
+  style_array = [4,4,3,4,2,0,2,3,1,0,1]
   i = 0
   STYLES.each {|style|
     Style.create(name: style[1], house_id: style_array[i])
-    i+=1}
+    i+=1
+  }
 end
+
+# def update_styles_house_id
+#   style_hash = {1 => [11,9],
+#   2 => [7,5],
+#   3 => [8,3],
+#   4 => [2,4,1]}
+# style_hash.each {|house| Style.update_all("")
+#
+# end
 
 def seed_beers
   puts "seed_beers"
@@ -47,4 +57,4 @@ end
 #   h_style.each {|style| Housestyle.create(house_id: 3, style_id: style)}
 #   r_style.each {|style| Housestyle.create(house_id: 4, style_id: style)}
 # end
-puts "end seed"
+# puts "end seeds"

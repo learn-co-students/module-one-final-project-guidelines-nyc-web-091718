@@ -6,14 +6,14 @@ belongs_to :style
 def self.sorting_beer(beer)
  b = Beer.find_by(name: beer)
  style= b.style_id #gives me style_id
-   if style == 11 || style == 9
-      "Gryffindor!"
-   elsif style == 10 || style ==  6 || style ==  5
-    "Slytherin!"
-  elsif style == 8 || style == 7 || style == 3
-      "Hufflepuff!"
-   else style == 2 || style == 4 || style == 1
-   "Ravenclaw!"
+  if style == 11 || style == 9
+    "Gryffindor!".yellow.on_red
+  elsif style ==  7 || style ==  5
+    "Slytherin!".white.on_green
+  elsif style == 8 || style == 3
+    "Hufflepuff!".black.on_yellow
+  else style == 2 || style == 4 || style == 1
+    "Ravenclaw!".light_black.on_blue
  end
 end
 
