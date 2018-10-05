@@ -14,12 +14,78 @@ class Game
       end
   end
 
-  def print_commands
-    puts "Commands:"
-    # exit
-   # help
-   # create npc custom
-   # create npc random
+  def print_commands(menu)
+    #puts "Commands:"
+    main_menu_content =
+    "
+    Main Menu:
+      > pry ----- [Opens Pry Console]
+      > exit ---- [Quits Program]
+      > help ---- [Prints All Commands]
+      > world --- [Opens World Menu]
+      > town ---- [Opens Town Menu]
+      > dungeon - [Opens Dungeon Menu]
+      > npc ----- [Opens Npc Menu]
+    ".colorize(:blue)
+    world_menu_content =
+    "
+    World Menu:
+      > create --------- [Creates New World]
+      > print
+          > all -------- [Prints All World Names]
+          > current ---- [Prints Current World Name]
+      > switch --------- [Switch to different World]
+      > [World Name]
+          > remove ----- [Deletes World]
+    ".colorize(:light_green)
+    town_menu_content =
+    "
+    Town Menu:
+      > create --------- [Creates New Town]
+      > print
+          > all -------- [Prints All Towns Names]
+      > [Town Name]
+          > remove ----- [Deletes Town]
+    ".colorize(:light_yellow)
+    dungeon_menu_content =
+    "
+    Dungeon Menu:
+      > create
+          > random ----- [Generates Random Dungeon]
+      > print
+          > all -------- [Prints All Dungeon Names]
+      > tree ----------- [Prints Entities in a Dungeon]
+      > [Dungeon Name]
+          > remove ----- [Deletes Dungeon]
+    ".colorize(:red)
+    npc_menu_content =
+    "
+    Npc Menu:
+      > create
+          > custom ----- [Creates Custom Npc]
+          > random ----- [Creates Random Npc]
+      > print
+          > all -------- [Prints All Towns Names]
+          > [Npc Name] - [Prints Npc]
+      > [Npc Name]
+          > stats ------ [Prints Npc Stats]
+          > modify ----- [Modifys Npc]
+          > remove ----- [Deletes Npc]
+    ".colorize(:light_blue)
+
+    case menu
+    when "all"
+      puts main_menu_content
+      puts world_menu_content
+      puts town_menu_content
+      puts dungeon_menu_content
+      puts npc_menu_content
+    when "world"; puts world_menu_content;
+    when "town"; puts town_menu_content;
+    when "dungeon"; puts dungeon_menu_content;
+    when "npc"; puts npc_menu_content;
+    end
+
   end
 
   def create_npc_custom # DONE
@@ -194,6 +260,7 @@ class Game
 
   def world_menu(cmd) # cmd is an array
     case cmd[0]
+    when "help"; print_commands("world");
     when "create";  create_world; # custom;
     when "print";   # attributes, towns;
       case cmd[1]
@@ -217,6 +284,7 @@ class Game
 
   def town_menu(cmd) # cmd is an array
     case cmd[0]
+    when "help"; print_commands("town");
     when "create"; create_town; # custom, random;
     when "print";   # attributes, citizens;
       case cmd[1]
@@ -234,6 +302,7 @@ class Game
 
   def dungeon_menu(cmd) # cmd is an array
     case cmd[0]
+    when "help"; print_commands("dungeon");
     when "create";
       case cmd[1]
       when "random"; create_dungeon_random;
@@ -256,6 +325,7 @@ class Game
 
   def npc_menu(cmd) # cmd is an array
     case cmd[0]
+    when "help"; print_commands("npc");
     when "create";  # custom, random;
       case cmd[1]
       when "custom"; create_npc_custom;
@@ -286,7 +356,7 @@ class Game
     case split_cmd[0]
     when "pry";   binding.pry;
     when "exit";  @running = false;
-    when "help";  print_commands;
+    when "help";  print_commands("all");
     when "world"; world_menu(rmain_cmd);
     when "town";  town_menu(rmain_cmd);
     when "dungeon"; dungeon_menu(rmain_cmd);
@@ -344,7 +414,6 @@ class Game
       @current_world = World.find {|w| w.id == choice.to_i}
     end
   end
-
 
   def start
     world_select
