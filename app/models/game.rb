@@ -59,6 +59,16 @@ class Game
     all_npcs.each {|n| puts n.name}
   end
 
+  def print_all(obj) # TODO print more than just name?
+    #binding.pry
+    all = obj.all # MAY FAIL ON DUNCGEONSECTIONS
+    all_names = []
+    all.each {|o| all_names << o.name}
+    return all_names
+    # all_npcs = Npc.all
+    # all_npcs.each {|n| puts n.name}
+  end
+
   def find_npc_by_name(name)
     like_name = "%#{name}%"
     npc = Npc.where("name LIKE ?", like_name)
@@ -69,6 +79,22 @@ class Game
       npc.each_with_index {|n,i| puts "[#{i}]: #{n.name}"}
       choice = gets.chomp
       return npc[choice.to_i]
+    else
+      puts "Could not find #{name}"
+      return 0
+    end
+  end
+
+  def find_obj_by_name(obj, name)
+    like_name = "%#{name}%"
+    foo = obj.where("name LIKE ?", like_name)
+    if foo.size == 1
+      return foo.first
+    elsif foo.size > 1
+      puts "Which #{name} were you looking for?"
+      foo.each_with_index {|n,i| puts "[#{i}]: #{n.name}"}
+      choice = gets.chomp
+      return foo[choice.to_i]
     else
       puts "Could not find #{name}"
       return 0
@@ -128,14 +154,26 @@ class Game
     npc.delete
   end
 
+  def remove_by_obj(obj)
+    obj.delete
+  end
+
   def world_menu(cmd) # cmd is an array
-    case cmd[1]
+    case cmd[0]
     when "create";  # custom;
     when "print";   # attributes, towns;
-    when "modify";  # by name; --> modify menu
-    when "remove";  # by name;
-
+      case cmd[1]
+      when "all"; print_all(World).each {|w| puts w};
+      end
     when "switch";  # --> switch world menu
+    else
+      case cmd[1]
+      when "tree";  # prints everything in this world
+      when "modify";
+      when "remove";
+        w = find_obj_by_name(World, cmd[0])
+        remove_by_obj(w)
+      end
     end
   end
 
@@ -143,8 +181,32 @@ class Game
     case cmd[0]
     when "create";  # custom, random;
     when "print";   # attributes, citizens;
-    when "modify";  # by name; --> modify menu
-    when "remove";  # by name;
+      case cmd[1]
+      when "all"; print_all(Town).each {|t| puts t};
+    else
+      case cmd[1]
+      when "modify";  # by name; --> modify menu
+      when "remove";  # by name;
+        t = find_obj_by_name(Town, cmd[0])
+        remove_by_obj(t)
+      end
+    end
+  end
+
+  def dungeon_menu(cmd) # cmd is an array
+    case cmd[0]
+    when "create";  # custom, random;
+    when "print";   # attributes, citizens;
+      case cmd[1]
+      when "all"; print_all(Dungeon).each {|t| puts t};
+    else
+      case cmd[1]
+      when "tree";
+      when "modify";  # by name; --> modify menu
+      when "remove";  # by name;
+        d = find_obj_by_name(Dungeon, cmd[0])
+        remove_by_obj(d)
+      end
     end
   end
 
@@ -181,7 +243,7 @@ class Game
     when "pry";   binding.pry;
     when "exit";  @running = false;
     when "help";  print_commands;
-    when "world"; world_menu(rmain_cmd); # TODO STOPPED HERE
+    when "world"; world_menu(rmain_cmd);
     when "town";  town_menu(rmain_cmd);
     when "dungeon"; dungeon_menu(rmain_cmd);
     when "npc";   npc_menu(rmain_cmd);
