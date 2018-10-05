@@ -4,6 +4,7 @@ class Game
   def initialize(running)
     @running = running
     @current_world = nil
+    @current_town = nil
   end
 
   def make_npc
@@ -28,9 +29,21 @@ class Game
     race = gets.chomp
     print "Age  : "
     age = gets.chomp
-
     input = [name, race, age]
-    Npc.create_custom(input)
+
+    if @current_world != nil
+      world_id = @current_world.id
+    else
+      world_id = nil
+    end
+
+    if @current_town != nil
+      town_id = @current_town.id
+    else
+      town_id = nil
+    end
+
+    Npc.create_custom(input, town_id, world_id)
   end
 
   def create_npc_random # DONE
@@ -208,6 +221,12 @@ class Game
     else
       puts "#{cmd} is not a valid command"
     end
+  end
+
+  def create_world
+    print "Enter the name of your World: "
+    name = gets.chomp
+    World.create(name: name)
   end
 
   def world_select
