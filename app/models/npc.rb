@@ -16,4 +16,6 @@ class Npc < ActiveRecord::Base
     age = input[2].to_i
     Npc.create(name: name, race: race, age: age, world_id: world_id, town_id: town_id)
   end
+
+
 end
