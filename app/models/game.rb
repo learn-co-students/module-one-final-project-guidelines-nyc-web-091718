@@ -101,6 +101,11 @@ class Game
     end
   end
 
+  def find_objs_by_parent_id(obj, pid={})
+    binding.pry
+    obj.select {|o| o[pid.first.first] == pid.first.last}
+  end
+
   def print_npc_by_name(name) # DONEish, Modify to use find_npc_by_name
     like_name = "%#{name}%"
     npc = Npc.where("name LIKE ?", like_name)
