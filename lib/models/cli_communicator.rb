@@ -45,12 +45,13 @@ end
     # "user_name = :user_name"
     if result[0]
       puts "I found you some dope vinosss".colorize(:white).colorize( :background => :red)
-      puts "------------------------------"
+      puts "---" * 10
       result.each do |wine|
         puts wine.name.colorize(:red)
-        puts ""
+        puts "---" * 10
       end
     else
+      puts ""
       puts "I can't find any wine like that, sorry bub".colorize(:white).colorize( :background => :red)
     end
   end
@@ -125,7 +126,7 @@ def generated_review_list(user)
   if review_list_continued.length != 0
   review_list_continued.each_with_index do |review, i|
     puts "************************"
-    puts "#{i+1}. Wine: #{find_wine_names_review(review)}".colorize(:white).colorize( :background => :red)
+    puts "#{i+1}. Wine: #{find_wine_names_review(review)}".colorize(:red)
     puts "Your rating: *#{review.rating}*".colorize(:yellow)
     puts "#{review.content}"
     end
@@ -142,6 +143,7 @@ def find_wine_names_review(review)
 end
 
 def update_delete_exit?
+  puts ""
   puts "Do you want to UPDATE reviews, DELETE reviews, or EXIT reviews".colorize(:white).colorize( :background => :red)
   user_input = gets.strip.downcase
 end
@@ -177,6 +179,7 @@ def anything_else
 end
 
 def say_bye
+  puts `clear`
   puts 'coolio, bye!'.colorize(:red)
-  puts "\u{1F377}" * 30
+  10.times do puts "\u{1F377}" * 30 end
 end
